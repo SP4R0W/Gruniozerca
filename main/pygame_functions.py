@@ -565,9 +565,8 @@ def keyPressed(keyCheck=""):
     global keydict
     pygame.event.clear()
     keys = pygame.key.get_pressed()
-    if sum(keys) > 0:
-        if keyCheck == "" or keys[keydict[keyCheck.lower()]]:
-            return True
+    if keyCheck == "" or keys[keydict[keyCheck.lower()]]:
+        return True
     return False
 
 
@@ -606,8 +605,10 @@ def makeTextBox(xpos, ypos, width, case=0, startingText="Please type here", maxL
 def textBoxInput(textbox, functionToCall=None, args=[]):
     # starts grabbing key inputs, putting into textbox until enter pressed
     global keydict
+
     textbox.text = ""
     returnVal = None
+
     while True:
         updateDisplay()
         if functionToCall:
@@ -639,7 +640,7 @@ def tick(fps):
     pygame.event.clear()
     keys = pygame.key.get_pressed()
     if (keys[pygame.K_ESCAPE]):
-        pygame.quit()        
+        pygame.quit()
         sys.exit()
     gameClock.tick(fps)
     return gameClock.get_fps()
@@ -671,13 +672,16 @@ def hideTextBox(textBoxName):
 
 def updateDisplay():
     global background
-    spriteRects = spriteGroup.draw(screen)
-    textboxRects = textboxGroup.draw(screen)
+    spriteGroup.draw(screen)
+    textboxGroup.draw(screen)
+
     pygame.display.update()
     keys = pygame.key.get_pressed()
+
     if (keys[pygame.K_ESCAPE]):
         pygame.quit()
         sys.exit()
+
     spriteGroup.clear(screen, background.surface)
     textboxGroup.clear(screen, background.surface)
 
